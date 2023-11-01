@@ -1,16 +1,16 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { AiOutlineStar } from 'react-icons/ai'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 import Similarmovie from './Similarmovie'
 // import Tvseries from './Tvseries'
 
 
 const Moviedetail = () => {
-  const { id } = useParams()
+  // const { id } = useParams()
   const id1 = JSON.parse(localStorage.getItem('myId'));
 
-  const [tvSeries, setTvSeries] = useState([]);
+  // const [tvSeries, setTvSeries] = useState([]);
   const [movieDetail, setMovieDetail] = useState("")
   const [language, setLanguage] = useState("")
   const [genre, setGenre] = useState("")
@@ -130,7 +130,7 @@ const Moviedetail = () => {
       </div>
       <div>
         <Similarmovie />
-        {tvSeries.name}
+        
       </div>
     </section>
   )

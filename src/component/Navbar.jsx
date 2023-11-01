@@ -13,7 +13,7 @@ import { FullScreen } from 'react-full-screen'
 
 const Navbar = () => {
     const { theme, setTheme, handle } = useContext(AppContext)
-    console.log(theme);
+    // console.log(theme);
   return (
     <>
     <FullScreen handle={handle}>

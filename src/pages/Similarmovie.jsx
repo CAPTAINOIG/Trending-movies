@@ -1,8 +1,9 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const Similarmovie = () => {
+  let navigate = useNavigate()
   const id1 = JSON.parse(localStorage.getItem('myId'));
 // console.log(id1);
   // const { id } = useParams()
