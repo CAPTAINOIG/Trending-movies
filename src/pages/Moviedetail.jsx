@@ -20,11 +20,11 @@ const Moviedetail = () => {
 
 
 
-  const Key = '26e2fa922cb6b8d9569ee0698f4e5226'
+  const Key = import.meta.env.VITE_APP_MY_KEY
   const imgBaseUrl = "https://image.tmdb.org/t/p";
 
-  let url = `https://api.themoviedb.org/3/movie/${id}?language=en-US',&api_key=${Key}`
-  const url1 = `https://api.themoviedb.org/3/movie/${id}/credits?language=en-US&api_key=${Key}`;
+  let url = `https://api.themoviedb.org/3/movie/${id1}?language=en-US',&api_key=${Key}`
+  const url1 = `https://api.themoviedb.org/3/movie/${id1}/credits?language=en-US&api_key=${Key}`;
   const url3 = `https://api.themoviedb.org/3/tv/${id1.e}?language=en-US&api_key=${Key}`;
   const url4 = `https://api.themoviedb.org/3/tv/${id1.e}/credits?language=en-US&api_key=${Key}`;
 
@@ -53,7 +53,7 @@ const Moviedetail = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [id, Key, url1]);
+  }, [id, Key, url1, url4]);
 
 
 

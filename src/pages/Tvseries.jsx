@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const Tvseries = () => {
   const id = JSON.parse(localStorage.getItem('myId'));
   const [tvSeries, setTvSeries] = useState([]);
-  const Key = '26e2fa922cb6b8d9569ee0698f4e5226';
+  const Key = import.meta.env.VITE_APP_MY_KEY
   const imgBaseUrl = 'https://image.tmdb.org/t/p';
 
   const url3 = `https://api.themoviedb.org/3/tv/${id}?language=en-US&api_key=${Key}`;
