@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import {FiSearch} from 'react-icons/fi'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // import loaderImg from '../assets/loaderImg.jpg   
 
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom'
 
 const Movies = () => {
     
+    let navigate = useNavigate()
 
     const [movies, setMovies] = useState([])
     // const [loader, setLoader] = useState(false)
@@ -45,7 +46,7 @@ const Movies = () => {
             
             axios.get(endpoint4)
             .then((response)=>{
-                console.log(response.data.results);
+                // console.log(response.data.results);
                 setSeries(response.data.results)
             })
             .catch((err)=>{
@@ -95,6 +96,12 @@ const Movies = () => {
         .catch((err)=>{
             console.log(err);
         })
+    }
+
+
+    const seriesId=(e, media)=>{
+        localStorage.setItem('myId', JSON.stringify({e, media}))
+        navigate('/detail')
     }
 
     return (
@@ -153,10 +160,10 @@ const Movies = () => {
                 series &&
                     series.map((item, i) => (
                         <div key={i} className=''>
-                        <Link to={`/detail/${item.id}`}>
+                        <div onClick={() => seriesId(item.id, item.media_type)}>
                         <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
                         <div className='text-center me-5 text-sm'>{item.name}</div>                            
-                        </Link>
+                        </div>
                         </div>
                     ))
                 }
