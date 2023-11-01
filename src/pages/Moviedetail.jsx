@@ -53,7 +53,7 @@ const Moviedetail = () => {
       .catch((err) => {
         console.log(err);
       });
-  }, [id, Key, url1, url4]);
+  }, [id1, Key, url1, url4]);
 
 
 
