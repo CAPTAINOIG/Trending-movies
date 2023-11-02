@@ -5,23 +5,26 @@ import { useNavigate, useParams } from 'react-router-dom';
 const Similarmovie = () => {
   let navigate = useNavigate()
   const id1 = JSON.parse(localStorage.getItem('myId'));
-// console.log(id1);
+// console.log(id);
   // const { id } = useParams()
 
 
   const [similarMovie, setSimilarMovie] = useState([]) // Initialize similarMovie as an empty array
-
+  const [loading, setLoading] = useState(true)
   const Key = import.meta.env.VITE_APP_MY_KEY
   const imgBaseUrl = "https://image.tmdb.org/t/p";
 
 
   let url2 = `https://api.themoviedb.org/3/movie/${id1}/similar?language=en-US&page=1&api_key=${Key}`
   let url3 = `https://api.themoviedb.org/3/tv/${id1.e}/similar?language=en-US&page=1&api_key=${Key}`
+  
+    // let url3 = `https://api.themoviedb.org/3/movie/${id1.e}/popular?language=en-US&page=1&api_key=${Key}`
 
 
   useEffect(() => {
     axios.get(id1.media ? (url3) : (url2))
       .then((response) => {
+        setLoading(false)
         // console.log(response.data.results);
         setSimilarMovie(response.data.results)
       })
@@ -48,6 +51,7 @@ const Similarmovie = () => {
     <h1 className='font-bold p-5 text-2xl'>Similar</h1>
     <div className='grid lg:grid-cols-7 text-sm grid-cols-3 p-5 gap-10'>
         {
+          loading ?  <div className='lg:ms-[400%] ms-[130%] dark:text-white text-orange-600 font-bold'>Loading.....</div> :
           similarMovie.map((item, i) => ( // Use parentheses instead of curly braces to return the JSX element
             <div key={i}>
             <div onClick={() => seriesId(item.id)}>

@@ -14,11 +14,17 @@ const Movies = () => {
     const [loader, setLoader] = useState(false)
     const [movies, setMovies] = useState([])
     const [select, setSelect] = useState('day')
-    const [series, setSeries] = useState([])
+    const [topRated, setTopRated] = useState([])
     const [discover, setDiscover] = useState([])
     const [search, setSearch] = useState("")
     const [message, setMessage] = useState("")
     const [searchMovies, setSearchMovies] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [loading1, setLoading1] = useState(true)
+    const [loading2, setLoading2] = useState(true)
+    const [people, setPeople] = useState([])
+
+
 
 
 
@@ -29,8 +35,17 @@ const Movies = () => {
 
     let endpoint = `https://api.themoviedb.org/3/trending/movie/day?language=en-US&api_key=${Key}`
     let endpoint2 = `https://api.themoviedb.org/3/trending/movie/week?language=en-US&api_key=${Key}`
-    let endpoint3 = `https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=${Key}`
-    let endpoint4 = `https://api.themoviedb.org/3/trending/tv/week?language=en-US&api_key=${Key}`
+    // let endpoint3 = `https://api.themoviedb.org/3/trending/tv/day?language=en-US&api_key=${Key}`
+    // let endpoint4 = `https://api.themoviedb.org/3/trending/tv/week?language=en-US&api_key=${Key}`
+    
+            // PEOPLE
+    let endpoint4 = `https://api.themoviedb.org/3/trending/person/week?language=en-US&api_key=${Key}`
+    let endpoint7 = `https://api.themoviedb.org/3/trending/person/day?language=en-US&api_key=${Key}`
+
+    // let endpoint = `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=${Key}`
+    let endpoint3 = `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&api_key=${Key}`
+     
+
     let endpoint5 = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&api_key=${Key}`
     let endpoint6 = `https://api.themoviedb.org/3/search/multi?query=${search}&include_adult=false&language=en-US&page=1&api_key=${Key}`
 
@@ -48,7 +63,7 @@ const Movies = () => {
         axios.get(endpoint4)
             .then((response) => {
                 // console.log(response.data.results);
-                setSeries(response.data.results)
+                setPeople(response.data.results)
             })
             .catch((err) => {
                 console.log(err);
@@ -59,6 +74,7 @@ const Movies = () => {
     else {
         axios.get(endpoint)
             .then((response) => {
+                setLoading(false)
                 // console.log(response.data.results);
                 setMovies(response.data.results)
             })
@@ -68,9 +84,20 @@ const Movies = () => {
 
 
         axios.get(endpoint3)
-            .then((response) => {
+        .then((response) => {
+                setLoading1(false)
                 // console.log(response.data.results);
-                setSeries(response.data.results)
+                setTopRated(response.data.results)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+
+            axios.get(endpoint7)
+            .then((response) => {
+                setLoading2(false)
+                console.log(response.data.results);
+                setPeople(response.data.results)
             })
             .catch((err) => {
                 console.log(err);
@@ -79,6 +106,7 @@ const Movies = () => {
 
     axios.get(endpoint5)
         .then((response) => {
+            setLoading2(false)
             // console.log(response.data.results);
             setDiscover(response.data.results)
         })
@@ -88,11 +116,17 @@ const Movies = () => {
 
 
 
+
+       
+
+
+        
+
     const Get = () => {
         if (search === "") {
             setMessage("input cannot be empty")
         } else {
-            setLoader(true)
+            setLoader(false)
             axios.get(endpoint6)
                 .then((response) => {
                     if (response.data.results < 1 || "") {
@@ -128,11 +162,11 @@ const Movies = () => {
     return (
         <section className='px-5 bg-black '>
             <div className='lg:w-1/3 md:w-1/2 w-full flex justify-between'>
-                <div className='flex border border-orange-600 dark:dark:border-gray-900 mt-10 bg-orange-600 rounded-lg bg-white lg:w-3/4 w-[60%] lg:ms-2 ms-3'>
+                <div className='flex border border-orange-600 dark:dark:border-gray-900 mt-10 bg-orange-600 rounded-lg bg-white  w-full lg:ms-2 '>
                     <span><FiSearch className='text-black mt-2' /></span>
-                    <input type="text" onChange={(e) => setSearch(e.target.value)} placeholder='Search Movies or TV Series' className='text-black w-full  rounded-lg ms-5 outline-none p-1' value={search} />
+                    <input type="text" onChange={(e) => setSearch(e.target.value)} placeholder='Search Movies or TV Series' className='text-black rounded-lg outline-none p-1 w-full' value={search} />
                 </div>
-                <button onClick={Get} className='bg-orange-600 font-bold dark:bg-gray-900 text-white lg:me-0 me-5 px-5 mt-10 rounded'>{loader ?
+                <button onClick={Get} className='bg-orange-600 font-bold dark:bg-gray-900 lg:ms-5 text-white lg:me-0 ms-5 px-5 mt-10 rounded-lg'>{loader ?
                     <div className='text-center'>
                         <img src={loaderImg} alt="" width={20} />
                     </div> : 'Search'}
@@ -171,6 +205,7 @@ const Movies = () => {
             <h1 className='mt-5 text-xl'>Movies</h1>
             <div className='grid lg:grid-cols-7 grid-cols-3 p-5 gap-10'>
                 {
+                    loading ?  <div className='lg:ms-[380%] ms-[130%] dark:text-white text-orange-600 font-bold'>Loading.....</div> :
                     movies.map((item, i) => (
                         <div key={i}>
                             <div onClick={() => seriesId(item.id)}>
@@ -182,15 +217,16 @@ const Movies = () => {
                 }
             </div>
 
-            <h1 className='mt-5 text-xl'>Series</h1>
+            <h1 className='mt-5 text-xl'>Top Rated</h1>
             <div className='grid lg:grid-cols-7 grid-cols-3 p-5 gap-10'>
                 {
-                    series &&
-                    series.map((item, i) => (
+                    loading1 ?  <div className='lg:ms-[380%] ms-[130%] dark:text-white text-orange-600 font-bold'>Loading.....</div> :
+                    // series &&
+                    topRated.map((item, i) => (
                         <div key={i}>
                             <div onClick={() => seriesId(item.id, item.media_type)}>
                                 <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
-                                <div className='text-center me-5 text-sm'>{item.name}</div>
+                                <div className='text-center me-5 text-sm'>{item.title}</div>
                             </div>
                         </div>
                     ))
@@ -201,6 +237,7 @@ const Movies = () => {
             <h1 className='mt-5 text-xl'>Discover</h1>
             <div className='grid lg:grid-cols-7 grid-cols-3 p-5 gap-10'>
                 {
+                    loading2 ?  <div className='lg:ms-[380%] ms-[130%] dark:text-white text-orange-600 font-bold'>Loading.....</div> :
                     discover &&
                     discover.map((item, i) => (
                         <div key={i}>
@@ -214,6 +251,30 @@ const Movies = () => {
                     ))
                 }
             </div>
+
+
+
+            
+            <h1 className='mt-5 text-xl'>People</h1>
+            <div className='grid lg:grid-cols-7 grid-cols-3 p-5 gap-10'>
+                {
+                    loading2 ?  <div className='lg:ms-[380%] ms-[130%] dark:text-white text-orange-600 font-bold'>Loading.....</div> :
+                    people &&
+                    people.map((item, i) => (
+                        <div key={i}>
+                            <div onClick={() => seriesId(item.id, item.media_type)}>
+                                <img src={`${imgBaseUrl}/original/${item.profile_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
+                                <div className='text-center me-5 text-sm'>{item.name}</div>
+                                <div className='text-center text-sm'>{item.title}</div>
+                            </div>
+                        </div>
+
+                    ))
+                }
+            </div>
+
+
+            
         </section>
     )
 }

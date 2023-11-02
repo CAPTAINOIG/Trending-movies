@@ -23,6 +23,7 @@ const Moviedetail = () => {
   const Key = import.meta.env.VITE_APP_MY_KEY
   const imgBaseUrl = "https://image.tmdb.org/t/p";
 
+  
   let url = `https://api.themoviedb.org/3/movie/${id1}?language=en-US',&api_key=${Key}`
   const url1 = `https://api.themoviedb.org/3/movie/${id1}/credits?language=en-US&api_key=${Key}`;
   const url3 = `https://api.themoviedb.org/3/tv/${id1.e}?language=en-US&api_key=${Key}`;
