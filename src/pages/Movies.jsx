@@ -96,7 +96,7 @@ const Movies = () => {
             axios.get(endpoint7)
             .then((response) => {
                 setLoading2(false)
-                console.log(response.data.results);
+                // console.log(response.data.results);
                 setPeople(response.data.results)
             })
             .catch((err) => {
