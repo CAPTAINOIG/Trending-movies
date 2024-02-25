@@ -52,6 +52,7 @@ const Movies = () => {
 
 
     if (select === 'week') {
+        // navigate('/detail')
         axios.get(endpoint2)
             .then((response) => {
                 setMovies(response.data.results);
@@ -117,11 +118,6 @@ const Movies = () => {
 
 
 
-       
-
-
-        
-
     const Get = () => {
         if (search === "") {
             setMessage("input cannot be empty")
@@ -162,7 +158,7 @@ const Movies = () => {
     return (
         <section className='px-5 bg-black '>
             <div className='lg:w-1/3 md:w-1/2 w-full flex justify-between'>
-                <div className='flex border border-orange-600 dark:dark:border-gray-900 mt-10 bg-orange-600 rounded-lg bg-white  w-full lg:ms-2 '>
+                <div className='flex border border-orange-600 dark:dark:border-gray-900 mt-10 rounded-lg bg-white  w-full lg:ms-2 '>
                     <span><FiSearch className='text-black mt-2' /></span>
                     <input type="text" onChange={(e) => setSearch(e.target.value)} placeholder='Search Movies or TV Series' className='text-black rounded-lg outline-none p-1 w-full' value={search} />
                 </div>

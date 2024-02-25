@@ -87,9 +87,6 @@ const Similarmovie = () => {
         activeClassName="active"
         />
         </div>
-
-      
-    
   );
 };
 
