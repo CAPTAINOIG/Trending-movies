@@ -7,7 +7,7 @@ const Home = () => {
 
   return (
     <>
-    <div className='bg-black text-white'>
+    <div className='bg-black text-white font-[Mirza]'>
     
     <Movies />  
     </div>

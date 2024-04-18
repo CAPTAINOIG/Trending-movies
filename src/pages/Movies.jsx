@@ -205,7 +205,7 @@ const Movies = () => {
                     movies.map((item, i) => (
                         <div key={i}>
                             <div onClick={() => seriesId(item.id)}>
-                                <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
+                                <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px]  hover:scale-110 rounded' alt="" />
                                 <div className='text-center me-5 text-sm'>{item.title}</div>
                             </div>
                         </div>
@@ -221,7 +221,7 @@ const Movies = () => {
                     topRated.map((item, i) => (
                         <div key={i}>
                             <div onClick={() => seriesId(item.id, item.media_type)}>
-                                <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
+                                <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px]  hover:scale-110 rounded' alt="" />
                                 <div className='text-center me-5 text-sm'>{item.title}</div>
                             </div>
                         </div>
@@ -238,7 +238,7 @@ const Movies = () => {
                     discover.map((item, i) => (
                         <div key={i}>
                             <div onClick={() => seriesId(item.id, item.media_type)}>
-                                <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
+                                <img src={`${imgBaseUrl}/original/${item.poster_path}`} className='w-full h-[70px]  hover:scale-110 rounded' alt="" />
                                 <div className='text-center me-5 text-sm'>{item.name}</div>
                                 <div className='text-center text-sm'>{item.title}</div>
                             </div>
@@ -259,7 +259,7 @@ const Movies = () => {
                     people.map((item, i) => (
                         <div key={i}>
                             <div onClick={() => seriesId(item.id, item.media_type)}>
-                                <img src={`${imgBaseUrl}/original/${item.profile_path}`} className='w-full h-[70px] w-[130px] hover:scale-110 rounded' alt="" />
+                                <img src={`${imgBaseUrl}/original/${item.profile_path}`} className='w-full h-[70px]  hover:scale-110 rounded' alt="" />
                                 <div className='text-center me-5 text-sm'>{item.name}</div>
                                 <div className='text-center text-sm'>{item.title}</div>
                             </div>
