@@ -48,7 +48,7 @@ const DashboardContext =({children})=>{
     }, [theme])
 
     return (
-        <AppContext.Provider value={{theme, setTheme, setTheme: updateTheme, handle}}>
+        <AppContext.Provider value={{theme, setTheme, updateTheme, handle}}>
              {children}
         </AppContext.Provider>
     )
